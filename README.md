@@ -7,5 +7,9 @@ This will be a small command line program that randomly generates a workout base
 
 Workouts will consist of a randomly generated swim, bike, or run workout based on the choosen an intensity sale of 1 - 6.
 
+##Features
+*Selecting a workout intensity
+*Selecting a workout type
+
 
 
