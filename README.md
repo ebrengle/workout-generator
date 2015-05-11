@@ -120,12 +120,35 @@ Choose Action:
 
 > 2
 
-Edit Exercise:
+Are you sure you want to delete: 15 Push Ups ? (y/n):
+
+>y
 
 ```
 
-##Ask for Workout
-I can't decide which workout to do to, I want to be told what to do today.
+##Create Workout
+Tell me which exercises to do to, I want to be told what to do today.
 
+Usage Story:
+
+```
+> ./workout-generator
+1. Add a workout
+2. List all exercises
+3. Create Workout
+4. Exit 
+
+> 3
+
+How many exercises would you like to do today?
+
+> 4
+
+1. 15 Push Ups
+2. 60 Situps
+3. 3 mile run
+4. Stretch
+
+```
 
 
