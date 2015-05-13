@@ -1,7 +1,7 @@
 require_relative '../test_helper'
 
 ##Add an exercise:
-In order to keep all my workouts straight I want to create a workout and add it to my list.
+#In order to keep all my workouts straight I want to create a workout and add it to my list.
 
 
 # Usage Example:
@@ -19,3 +19,9 @@ In order to keep all my workouts straight I want to create a workout and add it 
 # Would you like to Add another exercise? (y/n)
 # > n
 # Exit
+
+class AddingANewScenarioTest < Minitest::Test
+
+
+
+end

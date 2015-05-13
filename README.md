@@ -136,7 +136,7 @@ Usage Story:
 1. Add a workout
 2. List all exercises
 3. Create Workout
-4. Exit 
+4. Exit
 
 > 3
 
