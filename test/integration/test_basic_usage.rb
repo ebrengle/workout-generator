@@ -5,7 +5,7 @@ class BasicUsageTest < Minitest::Test
     shell_output = ""
     expected_output = ""
     IO.popen('./workout_generator') do |pipe|
-      expected_output = "[Help] Run as: ./workout_generator manage"
+      expected_output = "[Help] Run as: ./workout_generator manage\n"
       shell_output = pipe.read
     end
     assert_equal expected_output, shell_output
@@ -15,7 +15,7 @@ class BasicUsageTest < Minitest::Test
     shell_output = ""
     expected_output = ""
     IO.popen('./workout_generator blah') do |pipe|
-      expected_output = "[Help] Run as: ./workout_generator manage"
+      expected_output = "[Help] Run as: ./workout_generator manage\n"
       shell_output = pipe.read
     end
     assert_equal expected_output, shell_output
@@ -34,6 +34,16 @@ EOS
       pipe.puts "4"
       expected_output << "Peace Out!\n"
       pipe.close_write
+      shell_output = pipe.read
+    end
+    assert_equal expected_output, shell_output
+  end
+
+  def test_manage_multiple_arguments_given
+    shell_output = ""
+    expected_output = ""
+    IO.popen('./workout_generator manage blah') do |pipe|
+      expected_output = "[Help] Run as: ./workout_generator manage\n"
       shell_output = pipe.read
     end
     assert_equal expected_output, shell_output

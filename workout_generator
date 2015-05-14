@@ -8,29 +8,36 @@ def print_error_message
   print "[Help] Run as: ./workout_generator manage"
 end
 
-# menu_prompt = <<EOS
-# 1. Add an exercise
-# 2. List all exercises
-# 3. Create Workout
-# 4. Exit
-# EOS
+menu_prompt = <<EOS
+1. Add an exercise
+2. List all exercises
+3. Create Workout
+4. Exit
+EOS
 
-if ARGV.length < 1
-  print_error_message
-elsif ARGV.length == 1
-  # Not valid argument
-  if ARGV[0] != 'manage'
-    print_error_message
-  else
+
+if ARGV.size == 1 and ARGV[0] == "manage"
+  loop do
     choose do |menu|
       menu.prompt = ""
 
       exercise_controller = ExerciseController.new
-
-      menu.choice('Add a Workout') { say("") }
-      menu.choice('List all Exercises') { exercise_controller.index }
+      menu.choice('Add a Workout') do
+        user_input = ask("What exercise would you like to add?")
+        response = exercise_controller.add(user_input)
+        say("\"#{user_input}\" has been added\n") unless response.nil?
+      end
+      menu.choice('List all Exercises') do
+        say(exercise_controller.index)
+        exit!
+      end
       menu.choice('Create Workout') { say("") }
-      menu.choice('Exit') { say("Peace Out!\n") }
+      menu.choice('Exit') do
+        say("Peace Out!\n")
+        exit
+      end
     end
   end
+else
+  puts "[Help] Run as: ./workout_generator manage"
 end

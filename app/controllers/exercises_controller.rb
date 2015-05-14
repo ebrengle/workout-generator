@@ -1,3 +1,5 @@
+require "highline/import"
+
 class ExerciseController
   def index
     if Exercise.count > 0
@@ -9,4 +11,15 @@ class ExerciseController
       say("No exercises found. Add some exercise.")
     end
   end
+
+  def add(name)
+    name_cleaned = name.strip
+    exercise = Exercise.new(name_cleaned)
+    if exercise.save
+      "\"#{name}\" has been added\n"
+    else
+      exercise.errors
+    end
+  end
+
 end
