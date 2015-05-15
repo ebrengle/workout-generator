@@ -19,20 +19,6 @@ class Exercise
     Database.execute("select count(id) from exercises")[0][0]
   end
 
-  def self.create(name)
-    if name.empty?
-      raise ArgumentError.new
-    else
-      Database.execute("INSERT INTO exercises (name) VALUES (?)", name)
-    end
-  end
-
-  def save
-    return false unless valid?
-    Database.execute("INSERT INTO exercises (name) VALUES (?)", name)
-    @id = Database.execute("SELECT last_insert_rowid()")[0]['last_insert_rowid()']
-  end
-
   def valid?
     if name.nil? or name.empty? or /^\d+$/.match(name)
       @errors = "\"#{name}\" is not a valid exercise name."
@@ -41,5 +27,11 @@ class Exercise
       @errors = nil
       true
     end
+  end
+
+  def save
+    return false unless valid?
+    Database.execute("INSERT INTO exercises (name) VALUES (?)", name)
+    @id = Database.execute("SELECT last_insert_rowid()")[0]['last_insert_rowid()']
   end
 end

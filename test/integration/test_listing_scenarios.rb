@@ -8,7 +8,7 @@ class TestListingScenarios < Minitest::Test
     IO.popen('./workout_generator manage', 'r+') do |pipe|
       expected_output << main_menu
       pipe.puts "2"
-      expected_output << "\nNo exercises found. Add some exercise.\n"
+      expected_output << "\nNo exercises found. Add an exercise.\n"
       pipe.close_write
       shell_output = pipe.read
     end

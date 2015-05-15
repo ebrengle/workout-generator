@@ -5,7 +5,7 @@ describe ExerciseController do
   describe ".index" do
     let(:controller) {ExerciseController.new}
 
-    it "should say no scenarios found when empty" do
+    it "should say no exercises found when empty" do
       actual_output = controller.index
       expected_output = "No exercises found. Add an exercise.\n"
       assert_equal expected_output, actual_output
@@ -21,11 +21,11 @@ describe ExerciseController do
     end
 
     it "should not add exercise all spaces" do
-      scenario_name = "       "
+      exercise_name = "       "
       assert_raises(ArgumentError) { controller.add(exercise_name) }
     end
 
-    it "should only add scenarios that make sense" do
+    it "should only add exercises that make sense" do
       exercise_name = "77777777"
       controller.add(exercise_name)
       assert_equal 0, Exercise.count

@@ -4,11 +4,13 @@ class ExerciseController
   def index
     if Exercise.count > 0
       exercises = Exercise.all #All of the exercises in an array
+      exercises_string = ""
       exercises.each_with_index do |exercise, index|
-        say("#{index + 1}. #{exercise.name}") #=> 1. Push Ups
+        exercises_string << "#{index + 1}. #{exercise.name}\n" #=> 1. Push Ups
       end
+      exercises_string
     else
-      say("No exercises found. Add some exercise.")
+      "No exercises found. Add an exercise.\n"
     end
   end
 
@@ -21,5 +23,4 @@ class ExerciseController
       exercise.errors
     end
   end
-
 end
