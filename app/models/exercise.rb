@@ -1,22 +1,44 @@
 class Exercise
-  attr_accessor :name
   attr_reader :id, :errors
-
+  attr_accessor :name
 
   def initialize(name = nil)
     self.name = name
+    @id
+  end
+
+  def ==(other)
+    other.is_a?(Exercise) && other.id == self.id
+  end
+
+  def delete
+    Database.execute("DELETE * FROM exercises WHERE id = ?", id)
   end
 
   def self.all
-    Database.execute("select name from exercises order by name ASC").map do |row|
-      exercise = Exercise.new
-      exercise.name = row[0]
-      exercise
+    Database.execute("SELECT * FROM exercises ORDER BY id").map do |row|
+      populate_from_database(row)
     end
+  end
+
+  def self.populate_from_database(row)
+    exercise = Exercise.new
+    exercise.name = row['name']
+    exercise.instance_variable_set(:@id, row['id'])
+    exercise
   end
 
   def self.count
     Database.execute("select count(id) from exercises")[0][0]
+  end
+
+  def self.find(id)
+    row = Database.execute("select * from exercises where id = ?", id).first
+    if row.nil?
+      nil
+    else
+      populate_from_database(row)
+    end
   end
 
   def valid?
@@ -31,7 +53,14 @@ class Exercise
 
   def save
     return false unless valid?
-    Database.execute("INSERT INTO exercises (name) VALUES (?)", name)
-    @id = Database.execute("SELECT last_insert_rowid()")[0]['last_insert_rowid()']
+    if @id.nil?
+      Database.execute("INSERT INTO exercises (name) VALUES (?)", name)
+      @id = Database.execute("SELECT last_insert_rowid()")[0]['last_insert_rowid()']
+      true
+    else
+      Database.execute("UPDATE exercises SET name=? WHERE id=?", name, id)
+      true
+    end
   end
+
 end

@@ -22,7 +22,8 @@ describe ExerciseController do
 
     it "should not add exercise all spaces" do
       exercise_name = "       "
-      assert_raises(ArgumentError) { controller.add(exercise_name) }
+      result = controller.add(exercise_name)
+      assert_equal "\"\" is not a valid exercise name.", result
     end
 
     it "should only add exercises that make sense" do
