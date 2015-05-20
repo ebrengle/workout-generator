@@ -12,7 +12,7 @@ class ExerciseController
         menu.choice("Exit")
       end
     else
-      "No exercises found. Add an exercise.\n"
+      say("No exercises found. Add an exercise.\n")
     end
   end
 
@@ -39,8 +39,12 @@ class ExerciseController
     end
   end
 
-  def destroy(exercise)
-    exercise.delete
+  def destroy(id)
+    if Exercise.delete(id)
+      say ( "Exercise has been deleted" )
+    else
+      say ( "Exercise not found" )
+    end
   end
 
   def action_menu(exercise)
@@ -51,7 +55,8 @@ class ExerciseController
         edit(exercise)
       end
       menu.choice("Delete") do
-        destroy(exercise)
+        destroy(exercise.id)
+
       end
       menu.choice("Exit") do
         exit

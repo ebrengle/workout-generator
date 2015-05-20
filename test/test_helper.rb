@@ -23,9 +23,15 @@ def create_exercise(name)
 end
 
 def main_menu
-  "1. Add an Exercise\n2. List All Exercises\n3. Create Workout\n4. View Workouts\n5. Exit"
+  "1. Add an Exercise\n2. List All Exercises\n3. Exit"
 end
 
 def actions_menu
   "Would you like to?\n1. Edit Exercise\n2. Delete Exercise\n3. Exit\n"
+end
+
+def exit_from(pipe)
+  pipe.puts "Exit"
+  pipe.puts "3"
+  main_menu + "\nThanks for using our Workout App!\n"
 end

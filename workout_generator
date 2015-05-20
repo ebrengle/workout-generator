@@ -7,8 +7,6 @@ Dir["./lib/*.rb"].each { |f| require f }
 menu_prompt = <<EOS
 1. Add an Exercise
 2. List All Exercises
-3. Create Workout
-4. View Workouts
 5. Exit
 EOS
 
@@ -31,10 +29,8 @@ if ARGV.size == 1 and ARGV[0] == "manage"
       menu.choice('List All Exercises') do
         exercise_controller.index
       end
-      menu.choice('Create Workout') { say("") }
-      menu.choice('View Workouts') { say("") }
       menu.choice('Exit') do
-        say("Peace Out!\n")
+        say("Thanks for using our Workout App!\n")
         exit
       end
     end

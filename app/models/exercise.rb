@@ -11,8 +11,13 @@ class Exercise
     other.is_a?(Exercise) && other.id == self.id
   end
 
-  def delete
-    Database.execute("DELETE * FROM exercises WHERE id = ?", id)
+  def self.delete(id)
+    if find(id) == []
+      return false
+    else
+      Database.execute("DELETE FROM exercises WHERE id = ?", id)
+      return true
+    end
   end
 
   def self.all
@@ -29,11 +34,11 @@ class Exercise
   end
 
   def self.count
-    Database.execute("select count(id) from exercises")[0][0]
+    Database.execute("SELECT COUNT(id) FROM exercises")[0][0]
   end
 
   def self.find(id)
-    row = Database.execute("select * from exercises where id = ?", id).first
+    row = Database.execute("SELECT * FROM exercises WHERE id = ?", id).first
     if row.nil?
       nil
     else

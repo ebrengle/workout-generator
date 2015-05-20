@@ -33,6 +33,9 @@ class AddingANewExerciseTest < Minitest::Test
       expected_output << main_menu
       pipe.puts "2"
       expected_output << "\n1. #{test_exercise}\n"
+      expected_output << "2. Exit\n"
+      expected_output << "Select an exercise by list number:\n"
+      expected_output << exit_from(pipe)
       shell_output = pipe.read
       pipe.close_write
       pipe.close_read
@@ -49,12 +52,15 @@ class AddingANewExerciseTest < Minitest::Test
       expected_output << "\nWhat exercise would you like to add?\n"
       pipe.puts ""
       expected_output << "\"\" is not a valid exercise name.\n"
-      expected_output << "\nWhat exercise would you like to add?\n"
+      expected_output << "What exercise would you like to add?\n"
       pipe.puts happy_exercise
       expected_output << "\"#{happy_exercise}\" has been added\n"
       expected_output << main_menu
       pipe.puts "2"
       expected_output << "\n1. #{happy_exercise}\n"
+      expected_output << "2. Exit\n"
+      expected_output << "Select an exercise by list number:\n"
+      expected_output << exit_from(pipe)
       shell_output = pipe.read
       pipe.close_write
       pipe.close_read

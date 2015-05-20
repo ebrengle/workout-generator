@@ -2,16 +2,6 @@ require_relative "../test_helper"
 
 describe ExerciseController do
 
-  describe ".index" do
-    let(:controller) {ExerciseController.new}
-
-    it "should say no exercises found when empty" do
-      actual_output = controller.index
-      expected_output = "No exercises found. Add an exercise.\n"
-      assert_equal expected_output, actual_output
-    end
-  end
-
   describe ".add" do
     let(:controller) {ExerciseController.new}
 

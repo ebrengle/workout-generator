@@ -29,12 +29,10 @@ class BasicUsageTest < Minitest::Test
       expected_output = <<EOS
 1. Add an Exercise
 2. List All Exercises
-3. Create Workout
-4. View Workouts
-5. Exit
+3. Exit
 EOS
-      pipe.puts "5"
-      expected_output << "Peace Out!\n"
+      pipe.puts "3"
+      expected_output << "Thanks for using our Workout App!\n"
       pipe.close_write
       shell_output = pipe.read
     end
